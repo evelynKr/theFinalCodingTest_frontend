@@ -12,10 +12,10 @@ export default class App {
 
         this.router = new Router(
             {
-                '/': ProductPage,
-                '/detail/:id': ProductDetail,
-                '/cart': Cart,
-                '/order': Cart,
+                "/": ProductPage,
+                "/detail/:id": ProductDetail,
+                "/cart": Cart,
+                "/order": Cart,
             }
         );
 

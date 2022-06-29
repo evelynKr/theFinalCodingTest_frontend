@@ -2,12 +2,23 @@ class Router {
     // const router = new Router({
     //     "/":ProductPage,
     //     "/detail":ProductDetail,
+    //     "/detail/:id":ProductDetail,
     // });
     constructor(routes){
         if(!router){
             console.error("Can not initailize routes, need routes!");
         }
         this.routes = routes;
+
+        for (const key in routes) {
+            const route = routes[key];
+            if(key.indexOf(':') > -1){
+                const [_, routeName, param] = key.split('/');
+                this.routes['/' + routeName] = route;
+                delete this.routes[key];
+            }
+        }
+        console.log(this.routes);
     }
 
     init(rootElementId){
@@ -39,11 +50,15 @@ class Router {
     }
 
     routing(pathname){
-        const [_, routeName, ...param] = pathname.split('/');
+        const [_, routeName, param] = pathname.split('/');
         let page = '';
 
+        // /detail/10
         if(this.routes[pathname]){
             const components = new this.routes[pathname];
+            page = components.render();
+        } else if(param){
+            const components = new this.routes['/' + routeName](param);
             page = components.render();
         }
 
@@ -53,7 +68,7 @@ class Router {
     }
 
     render(page){
-        const rootElementId = document.querySelector(this.rootElementId);
+        const rootElement = document.querySelector(this.rootElementId);
         rootElement.innerHTML = '';
         rootElement.appendChild(page);
     }

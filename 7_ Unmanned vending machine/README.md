@@ -8,11 +8,11 @@
 
 ## 1. 디자인
 
-PC 화면
-![](./image/preview/PC.png)
+- PC 화면
+  ![](./image/preview/PC.png)
 
-모바일 화면
-![](./image/preview/Mobile.png)
+- 모바일 화면
+  ![](./image/preview/Mobile.png)
 
 <br />
 
